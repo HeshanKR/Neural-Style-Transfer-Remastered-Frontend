@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist",
             "browser": "src/main.ts",
@@ -28,7 +28,10 @@
             ],
             "styles": [
               "src/styles.css"
-            ]
+            ],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js"
+            }
           },
           "configurations": {
             "production": {
@@ -44,7 +47,10 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "customWebpackConfig": {
+                "path": "./custom-webpack.config.js"
+              }
             },
             "development": {
               "optimization": false,
