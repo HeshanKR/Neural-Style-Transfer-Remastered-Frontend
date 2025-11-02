@@ -50,10 +50,16 @@ export class App {
     reader.readAsDataURL(file);
   }
 
-  stylizeImage() {
-    console.log('API_URL:', process.env['API_URL']);
-    console.log('process.env:', process.env);
+  private getApiUrl(): string {
+    // Check if we're in production (Vercel)
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      return 'https://neural-style-transfer-remastered-production.up.railway.app';
+    }
+    // Development fallback
+    return 'http://localhost:8000';
+  }
 
+  stylizeImage() {
     if (!this.contentImage || !this.styleImage) {
       this.errorMessage = 'Please select both content and style images.';
       return;
@@ -67,7 +73,7 @@ export class App {
     formData.append('content', this.contentImage);
     formData.append('style', this.styleImage);
 
-    this.http.post<{stylized_image: string}>(`${process.env['API_URL']}/stylize`, formData)
+    this.http.post<{stylized_image: string}>(`${this.getApiUrl()}/stylize`, formData)
       .subscribe({
         next: (response) => {
           this.stylizedImage = 'data:image/jpeg;base64,' + response.stylized_image;
