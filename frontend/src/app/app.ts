@@ -51,6 +51,9 @@ export class App {
   }
 
   stylizeImage() {
+    console.log('API_URL:', process.env['API_URL']);
+    console.log('process.env:', process.env);
+
     if (!this.contentImage || !this.styleImage) {
       this.errorMessage = 'Please select both content and style images.';
       return;
