@@ -56,7 +56,7 @@ export class App {
       return 'https://neural-style-transfer-remastered-production.up.railway.app';
     }
     // Development fallback
-    return 'http://localhost:8000';
+    return 'http://localhost:5000';
   }
 
   stylizeImage() {
