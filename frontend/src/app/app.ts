@@ -85,4 +85,28 @@ export class App {
         }
       });
   }
+
+  downloadImage() {
+    if (this.stylizedImage) {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx?.drawImage(img, 0, 0);
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'stylized-image.png';
+            link.click();
+            URL.revokeObjectURL(url);
+          }
+        }, 'image/png');
+      };
+      img.src = this.stylizedImage;
+    }
+  }
 }

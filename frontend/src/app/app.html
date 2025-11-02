@@ -356,6 +356,7 @@
   <div *ngIf="stylizedImage" class="result-section">
     <h2>Stylized Image:</h2>
     <img [src]="stylizedImage" alt="Stylized Image">
+    <button (click)="downloadImage()" class="download-btn" [disabled]="!stylizedImage">Download Image</button>
   </div>
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
