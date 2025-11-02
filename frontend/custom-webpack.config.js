@@ -1,9 +1,9 @@
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  plugins: [
+  plugins: process.env.NODE_ENV === 'production' ? [] : [
     new Dotenv({
-      path: process.env.NODE_ENV === 'production' ? './.env.production' : './.env'
+      path: './.env'
     })
   ]
 };
